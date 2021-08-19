@@ -1,0 +1,14 @@
+[
+    {
+        "path": "/1",
+        "method": "GET",
+        "code": 200,
+        "body": {"name1": "hugang", "name2": "hugang", "name3": {"1": "hugang", "2": "hugang", "3": "hugang"}}
+    },
+    {
+        "path": "/1",
+        "method": "POST",
+        "code": 415,
+        "body": {"name1": "hugang1", "name2": "hugang2", "name3": {"1": "hugang31", "2": "hugang32", "3": "hugang36"}}
+    }
+]
