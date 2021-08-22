@@ -1,14 +1,42 @@
 [
-    {
-        "path": "/1",
-        "method": "GET",
-        "code": 200,
-        "body": {"name1": "hugang", "name2": "hugang", "name3": {"1": "hugang", "2": "hugang", "3": "hugang"}}
-    },
-    {
-        "path": "/1",
-        "method": "POST",
-        "code": 415,
-        "body": {"name1": "hugang1", "name2": "hugang2", "name3": {"1": "hugang31", "2": "hugang32", "3": "hugang36"}}
+  {
+    "path": "/1",
+    "method": "GET",
+    "code": 400,
+    "data": {
+      "name1": "hugang-get",
+      "name2": "hugang",
+      "name3": { "1": "hugang", "2": "hugang", "3": "hugang" }
     }
+  },
+  {
+    "path": "/1",
+    "method": "POST",
+    "code": 200,
+    "data": {
+      "name1": "hugang1-post",
+      "name2": "hugang2",
+      "name3": { "1": "hugang31", "2": "hugang32", "3": "hugang36" }
+    }
+  },
+  {
+    "path": "/1",
+    "method": "PUT",
+    "code": 200,
+    "data": {
+      "name1": "hugang-put",
+      "name2": "hugang",
+      "name3": { "1": "hugang", "2": "hugang", "3": "hugang" }
+    }
+  },
+  {
+    "path": "/1",
+    "method": "DELETE",
+    "code": 200,
+    "data": {
+      "name1": "hugang-delete",
+      "name2": "hugang",
+      "name3": { "1": "hugang", "2": "hugang", "3": "hugang" }
+    }
+  }
 ]
