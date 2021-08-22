@@ -12,7 +12,7 @@ node mock-server.js
 ```json
 [
   {
-    "path": "/1",
+    "url": "/1",
     "method": "GET",
     "code": 200,
     "data": {

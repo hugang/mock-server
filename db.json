@@ -1,6 +1,6 @@
 [
   {
-    "path": "/1",
+    "url": "/1",
     "method": "GET",
     "code": 400,
     "data": {
@@ -10,7 +10,7 @@
     }
   },
   {
-    "path": "/1",
+    "url": "/1",
     "method": "POST",
     "code": 200,
     "data": {
@@ -20,7 +20,7 @@
     }
   },
   {
-    "path": "/1",
+    "url": "/1",
     "method": "PUT",
     "code": 200,
     "data": {
@@ -30,7 +30,7 @@
     }
   },
   {
-    "path": "/1",
+    "url": "/1",
     "method": "DELETE",
     "code": 200,
     "data": {
