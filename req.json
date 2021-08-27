@@ -1,0 +1,34 @@
+{
+  "target": "1",
+  "requests": [
+    {
+      "id": "1",
+      "protocol": "https",
+      "options": {
+        "hostname": "www.google.com",
+        "port": 443,
+        "path": "/",
+        "method": "GET"
+      },
+      "body": {
+        "req1": "req1"
+      }
+    },
+    {
+      "id": "2",
+      "protocol": "http",
+      "options": {
+        "hostname": "www.google.com",
+        "port": 80,
+        "path": "/todos",
+        "method": "GET",
+        "headers": {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      },
+      "body": {
+        "req1": "req1"
+      }
+    }
+  ]
+}
