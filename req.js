@@ -12,31 +12,47 @@ let target = jsonData.target;
 for (let i = 0; i < jsonData.requests.length; i++) {
   const el = jsonData.requests[i];
   if (el.id === target) {
-    let reqBody;
-    let requestExecutor = http;
+    const reqBody = el.body;
+    const options = el.options;
 
     if (el.protocol.indexOf("https") > -1) {
-      requestExecutor = https;
-    }
+      const req = https.request(options, (res) => {
+        console.log(`statusCode: ${res.statusCode}`);
 
-    const options = el.options;
-    const req = https.request(options, (res) => {
-      console.log(`statusCode: ${res.statusCode}`);
-
-      res.on("data", (d) => {
-        process.stdout.write(d);
+        res.on("data", (d) => {
+          process.stdout.write(d);
+        });
       });
-    });
 
-    req.on("error", (error) => {
-      console.error(error);
-    });
+      req.on("error", (error) => {
+        console.error(error);
+      });
 
-    if (!isEmpty(reqBody)) {
-      req.write(reqBody);
+      if (!isEmpty(reqBody)) {
+        req.write(reqBody);
+      }
+
+      req.end();
+    } else {
+      const req = http.request(options, (res) => {
+        console.log(`statusCode: ${res.statusCode}`);
+
+        res.on("data", (d) => {
+          process.stdout.write(d);
+        });
+      });
+
+      req.on("error", (error) => {
+        console.error(error);
+      });
+
+      if (!isEmpty(reqBody)) {
+        req.write(reqBody);
+      }
+
+      req.end();
     }
 
-    req.end();
     break;
   }
 }
