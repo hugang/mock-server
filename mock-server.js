@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
     if (url.indexOf("?") > 0) {
       url = url.substr(0, url.indexOf("?"));
     }
-    if (el.url === req.url && el.method === req.method) {
+    if (el.url === url && el.method === req.method) {
       respCode = el.code;
       respBody = JSON.stringify(el.data);
       break;
