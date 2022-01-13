@@ -10,33 +10,14 @@
     }
   },
   {
-    "url": "/1",
+    "url": "/2",
+    "param": "name=hugang",
     "method": "POST",
     "code": 200,
     "data": {
       "name1": "hugang1-post",
       "name2": "hugang2",
       "name3": { "1": "hugang31", "2": "hugang32", "3": "hugang36" }
-    }
-  },
-  {
-    "url": "/1",
-    "method": "PUT",
-    "code": 200,
-    "data": {
-      "name1": "hugang-put",
-      "name2": "hugang",
-      "name3": { "1": "hugang", "2": "hugang", "3": "hugang" }
-    }
-  },
-  {
-    "url": "/1",
-    "method": "DELETE",
-    "code": 200,
-    "data": {
-      "name1": "hugang-delete",
-      "name2": "hugang",
-      "name3": { "1": "hugang", "2": "hugang", "3": "hugang" }
     }
   }
 ]

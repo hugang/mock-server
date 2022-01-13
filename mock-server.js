@@ -40,9 +40,10 @@ const server = http.createServer((req, res) => {
     const el = jsonData[i];
     let url = req.url;
     if (url.indexOf("?") > 0) {
-      url = url.substr(0, url.indexOf("?"));
+      url = url.substring(0, url.indexOf("?"));
     }
-    if (el.url === url && el.method === req.method) {
+    if (el.url === url && el.method === req.method && (!el.param || req.url.indexOf(el.param)>0)) {
+      console.log("matching url: "+req.url);
       respCode = el.code;
       respBody = JSON.stringify(el.data);
       break;
