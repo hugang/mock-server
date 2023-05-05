@@ -1,10 +1,14 @@
+// Usage: node mock-server.js
+// Description: mock server for development, read db.json for data
 const http = require("http");
 const fs = require("fs");
 
-const hostname = "localhost";
+// 定义hostname和port
+const hostname = "0.0.0.0";
 const port = 3000;
 
 const server = http.createServer((req, res) => {
+  // default response
   let respCode = 404;
   let respBody = "not found";
 
@@ -33,29 +37,46 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // 读取db.json文件
   let rawData = fs.readFileSync("db.json");
   let jsonData = JSON.parse(rawData);
 
+  // 遍历db.json文件，找到匹配的url
+  let respType = "";
+  let respFile = "";
+
+  // 遍历db.json文件，找到匹配的url
   for (let i = 0; i < jsonData.length; i++) {
     const el = jsonData[i];
     let url = req.url;
     if (url.indexOf("?") > 0) {
       url = url.substring(0, url.indexOf("?"));
     }
-    if (el.url === url && el.method === req.method && (!el.param || req.url.indexOf(el.param)>0)) {
-      console.log("matching url: "+req.url);
+    if (el.url === url && el.method === req.method && (!el.param || req.url.indexOf(el.param) > 0)) {
+      console.log("matching url: " + req.url);
       respCode = el.code;
       respBody = JSON.stringify(el.data);
+      respType = el.type;
+      respFile = el.data;
       break;
     }
   }
-
-  res
-    .writeHead(respCode, {
+  // 根据返回的类型，返回文件或者json
+  if (respType) {
+    const fileStream = fs.createReadStream(__dirname + "/" + respFile);
+    res.writeHead(200, {
+      "Content-Type": respType,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Expose-Headers": "Content-Disposition",
+      "Content-Disposition": "attachment; filename=" + respFile
+    });
+    fileStream.pipe(res);
+  } else {
+    res.writeHead(respCode, {
       "Content-Length": Buffer.byteLength(respBody),
-      "Content-Type": "text/plain",
-    })
-    .end(respBody);
+      "Content-Type": "application/json",
+    }).end(respBody);
+  }
 });
 server.listen(port, hostname, () => {
   console.log("Server running at http://" + hostname + ":" + port);
