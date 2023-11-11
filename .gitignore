@@ -1,0 +1,12 @@
+.idea
+**/*.iml
+
+# Compiled class file
+*.class
+**/target/
+logs/
+
+**/package-lock.json
+**/node_modules
+**/dist
+**/build

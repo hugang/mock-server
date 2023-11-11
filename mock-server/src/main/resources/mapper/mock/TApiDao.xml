@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.hugang.mock.dao.TApiDao">
+
+    <resultMap type="io.hugang.mock.entity.TApiEntity" id="tApiMap">
+        <result property="id" column="id"/>
+        <result property="url" column="url"/>
+        <result property="method" column="method"/>
+        <result property="code" column="code"/>
+        <result property="type" column="type"/>
+        <result property="data" column="data"/>
+        <result property="param" column="param"/>
+        <result property="attachmentId" column="attachment_id"/>
+        <result property="attachmentName" column="attachment_name"/>
+    </resultMap>
+
+</mapper>
