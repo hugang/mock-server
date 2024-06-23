@@ -30,9 +30,8 @@
   },
   {
     "url": "/3",
-    "method": "GET",
+    "method": "POST",
     "code": 200,
-    "type": "application/png",
-    "data": "1.png"
+    "data": "key1=value1&key2=value2"
   }
 ]

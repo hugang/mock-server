@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -40,6 +41,38 @@ func loadJsonFile(filename string) error {
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	// initialize urlEntries
 	urlEntries = []UrlEntry{}
+
+	// Read the existing data to urlEntries
+	file, err := os.Open("db.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+	}(file)
+
+	byteValue, _ := io.ReadAll(file)
+	err = json.Unmarshal(byteValue, &urlEntries)
+	if err != nil {
+		return
+	}
+
+	// handle rest api to put data into db.json
+	if r.URL.Path == "/api/add" && r.Method == "POST" {
+		handleAddData(w, r)
+		return
+	}
+	// handle rest api to delete data from db.json
+	if r.URL.Path == "/api/delete" && r.Method == "DELETE" {
+		handleDeleteData(w)
+		return
+
+	}
+
 	// Load the json file
 	readFileErr := loadJsonFile("db.json")
 	if readFileErr != nil {
@@ -126,6 +159,93 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+}
+
+func handleDeleteData(w http.ResponseWriter) {
+	// initialize urlEntries
+	urlEntries = []UrlEntry{}
+	// open the json file
+	file, fileOpenErr := os.OpenFile("db.json", os.O_RDWR|os.O_CREATE, 0644)
+	if fileOpenErr != nil {
+		log.Println(fileOpenErr)
+		return
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+	}(file)
+	// truncate the file
+	err := file.Truncate(0)
+	if err != nil {
+		return
+	}
+	// write the urlEntries to the file
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "    ")
+	err = encoder.Encode(urlEntries)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	// respond with 200 OK
+	w.WriteHeader(http.StatusOK)
+	_, err = fmt.Fprintln(w, "OK")
+	if err != nil {
+		return
+	}
+	return
+}
+
+func handleAddData(w http.ResponseWriter, r *http.Request) {
+	// get the data from the request body
+	var entry UrlEntry
+	err := json.NewDecoder(r.Body).Decode(&entry)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		_, err := fmt.Fprintln(w, "Bad Request")
+		if err != nil {
+			return
+		}
+		return
+	}
+	// append the new entry to the urlEntries
+	urlEntries = append(urlEntries, entry)
+	// open the json file
+	file, fileOpenErr := os.OpenFile("db.json", os.O_RDWR|os.O_CREATE, 0644)
+	if fileOpenErr != nil {
+		log.Println(fileOpenErr)
+		return
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+	}(file)
+	// truncate the file
+	err = file.Truncate(0)
+	if err != nil {
+		return
+	}
+	// write the urlEntries to the file
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "    ")
+	err = encoder.Encode(urlEntries)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	// respond with 201 created
+	w.WriteHeader(http.StatusCreated)
+	_, err = fmt.Fprintln(w, "Added")
+	if err != nil {
+		return
+	}
+	return
 }
 
 func main() {
