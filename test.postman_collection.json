@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "19cc6838-509a-461f-b92f-c4d55aa66c2c",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30500701"
+	},
+	"item": [
+		{
+			"name": "add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"url\": \"/4\",\r\n    \"method\": \"GET\",\r\n    \"code\": 404,\r\n    \"data\": {\r\n      \"name1\": \"hugang-get\",\r\n      \"name2\": \"hugang\",\r\n      \"name3\": {\r\n        \"1\": \"hugang\",\r\n        \"2\": \"hugang\",\r\n        \"3\": \"hugang\"\r\n      }\r\n    }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/mock/api/add",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"mock",
+						"api",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"url\": \"/4\",\r\n    \"method\": \"GET\",\r\n    \"code\": 404,\r\n    \"data\": {\r\n      \"name1\": \"hugang-get\",\r\n      \"name2\": \"hugang\",\r\n      \"name3\": {\r\n        \"1\": \"hugang\",\r\n        \"2\": \"hugang\",\r\n        \"3\": \"hugang\"\r\n      }\r\n    }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/mock/api/delete",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"mock",
+						"api",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/2?name=hugang",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "hugang"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

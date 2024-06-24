@@ -151,12 +151,12 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		return
 
 	} else {
-		w.Header().Set("Content-Type", "application/json")
 		// Encode the data element as json and write it to the response body
 		responseErr := json.NewEncoder(w).Encode(responseEntry.Data)
 		if responseErr != nil {
 			log.Println(responseErr)
 		}
+		w.Header().Set("Content-Type", "application/json")
 		return
 	}
 }
@@ -253,6 +253,6 @@ func main() {
 	http.HandleFunc("/", handleRequest)
 
 	// Start the server and listen on port 8080
-	log.Println("Server is running on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("Server is running on port 9000")
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

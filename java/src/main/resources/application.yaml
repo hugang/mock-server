@@ -1,0 +1,6 @@
+server:
+  port: 9000
+
+db:
+  json:
+    path: C:/projs/github/mock-server/java
